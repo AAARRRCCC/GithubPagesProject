@@ -1,0 +1,165 @@
+{
+    "participants": [
+        {
+            "username": "dev1",
+            "displayName": "Alex Morgan",
+            "githubProfile": "https://github.com/dev1",
+            "joinDate": "2025-01-01T00:00:00Z",
+            "bio": "Full-stack developer passionate about UI/UX and data visualization",
+            "avatar": "https://github.com/dev1.png",
+            "competitions": [
+                "competition-2025-03-15",
+                "competition-2025-04-15",
+                "competition-2025-05-01"
+            ],
+            "wins": [
+                "competition-2025-05-01"
+            ],
+            "stats": {
+                "totalParticipations": 3,
+                "winRate": 0.33,
+                "currentStreak": 3
+            }
+        },
+        {
+            "username": "dev2",
+            "displayName": "Jordan Taylor",
+            "githubProfile": "https://github.com/dev2",
+            "joinDate": "2025-01-15T00:00:00Z",
+            "bio": "Back-end specialist with interest in performance optimization and API design",
+            "avatar": "https://github.com/dev2.png",
+            "competitions": [
+                "competition-2025-03-01",
+                "competition-2025-04-01",
+                "competition-2025-05-01"
+            ],
+            "wins": [
+                "competition-2025-04-01"
+            ],
+            "stats": {
+                "totalParticipations": 3,
+                "winRate": 0.33,
+                "currentStreak": 3
+            }
+        },
+        {
+            "username": "dev3",
+            "displayName": "Casey Chen",
+            "githubProfile": "https://github.com/dev3",
+            "joinDate": "2025-02-01T00:00:00Z",
+            "bio": "DevOps engineer with a passion for automation and CLI tools",
+            "avatar": "https://github.com/dev3.png",
+            "competitions": [
+                "competition-2025-03-01",
+                "competition-2025-04-15",
+                "competition-2025-05-01"
+            ],
+            "wins": [
+                "competition-2025-03-01",
+                "competition-2025-04-15"
+            ],
+            "stats": {
+                "totalParticipations": 3,
+                "winRate": 0.67,
+                "currentStreak": 3
+            }
+        },
+        {
+            "username": "dev4",
+            "displayName": "Morgan Riley",
+            "githubProfile": "https://github.com/dev4",
+            "joinDate": "2025-02-10T00:00:00Z",
+            "bio": "Mobile developer exploring web technologies and server monitoring",
+            "avatar": "https://github.com/dev4.png",
+            "competitions": [
+                "competition-2025-03-15",
+                "competition-2025-04-15"
+            ],
+            "wins": [],
+            "stats": {
+                "totalParticipations": 2,
+                "winRate": 0,
+                "currentStreak": 0
+            }
+        },
+        {
+            "username": "dev5",
+            "displayName": "Ryan Kim",
+            "githubProfile": "https://github.com/dev5",
+            "joinDate": "2025-03-01T00:00:00Z",
+            "bio": "Game developer and graphics programming enthusiast",
+            "avatar": "https://github.com/dev5.png",
+            "competitions": [
+                "competition-2025-04-01"
+            ],
+            "wins": [],
+            "stats": {
+                "totalParticipations": 1,
+                "winRate": 0,
+                "currentStreak": 0
+            }
+        },
+        {
+            "username": "dev6",
+            "displayName": "Taylor Johnson",
+            "githubProfile": "https://github.com/dev6",
+            "joinDate": "2025-03-05T00:00:00Z",
+            "bio": "UX designer and front-end developer specializing in accessibility",
+            "avatar": "https://github.com/dev6.png",
+            "competitions": [
+                "competition-2025-03-01",
+                "competition-2025-04-01",
+                "competition-2025-05-01"
+            ],
+            "wins": [],
+            "stats": {
+                "totalParticipations": 3,
+                "winRate": 0,
+                "currentStreak": 3
+            }
+        },
+        {
+            "username": "dev7",
+            "displayName": "Jamie Rivera",
+            "githubProfile": "https://github.com/dev7",
+            "joinDate": "2025-02-20T00:00:00Z",
+            "bio": "Financial tech specialist with focus on real-time data processing",
+            "avatar": "https://github.com/dev7.png",
+            "competitions": [
+                "competition-2025-03-15",
+                "competition-2025-04-15"
+            ],
+            "wins": [
+                "competition-2025-03-15"
+            ],
+            "stats": {
+                "totalParticipations": 2,
+                "winRate": 0.5,
+                "currentStreak": 0
+            }
+        },
+        {
+            "username": "dev8",
+            "displayName": "Ash Patel",
+            "githubProfile": "https://github.com/dev8",
+            "joinDate": "2025-02-28T00:00:00Z",
+            "bio": "NLP expert working on multilingual content systems",
+            "avatar": "https://github.com/dev8.png",
+            "competitions": [
+                "competition-2025-03-15",
+                "competition-2025-04-01"
+            ],
+            "wins": [],
+            "stats": {
+                "totalParticipations": 2,
+                "winRate": 0,
+                "currentStreak": 0
+            }
+        }
+    ],
+    "metadata": {
+        "lastUpdated": "2025-05-14T10:00:00Z",
+        "totalParticipants": 8,
+        "totalCompetitions": 5
+    }
+}

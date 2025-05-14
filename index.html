@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CodeClash is a dynamic GitHub Pages website designed to serve as the central hub for a biweekly programming competition among friends.">
+    <meta name="keywords" content="programming, competition, coding, challenge, leaderboard, github, hackathon">
+    <meta name="author" content="CodeClash Team">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="CodeClash: Programming Competition Leaderboard">
+    <meta property="og:description"
+        content="Join the CodeClash programming competition community! Biweekly challenges, friendly competition, and skill building.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://codeclash.github.io/">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CodeClash: Programming Competition Leaderboard">
+    <meta name="twitter:description"
+        content="Join the CodeClash programming competition community! Biweekly challenges, friendly competition, and skill building.">
+
+    <title>CodeClash: Programming Competition Leaderboard</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <!-- This section contains the site logo, title, and main navigation -->
+        <div class="logo-container">
+            <!-- Logo placeholder -->
+            <div class="logo">CodeClash</div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="history.html">Competition History</a></li>
+                <li><a href="current.html">Current Challenge</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Countdown Timer Section -->
+        <section id="countdown-section">
+            <!-- This section displays the countdown to the next deadline (8:30pm on 5/14) -->
+            <h2>Next Submission Deadline: May 14, 2025 at 8:30 PM</h2>
+            <div id="countdown-timer" aria-live="polite" aria-label="Countdown to submission deadline">
+                <!-- Countdown timer will be dynamically populated by JavaScript -->
+                <div class="countdown-display">
+                    <div class="time-unit">
+                        <span id="days" aria-label="days remaining">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="hours" aria-label="hours remaining">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="minutes" aria-label="minutes remaining">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="seconds" aria-label="seconds remaining">00</span>
+                        <span class="time-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Screen reader announcement element -->
+            <div id="sr-announcement" class="sr-only" aria-live="polite"></div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section id="leaderboard-section">
+            <!-- This section shows top participants and competition winners -->
+            <h2>Leaderboard</h2>
+            <div class="leaderboard-preview">
+                <!-- Leaderboard will be populated by JavaScript -->
+                <p>Loading leaderboard data...</p>
+            </div>
+            <div class="view-more-container">
+                <a href="#full-leaderboard" class="view-more" id="show-full-leaderboard">View Full Leaderboard</a>
+            </div>
+        </section>
+
+        <!-- Competition History Section -->
+        <section id="history-section">
+            <!-- This section displays recent competitions and results -->
+            <h2>Recent Competitions</h2>
+            <div class="history-preview">
+                <!-- Competition history will be dynamically populated -->
+                <p>Loading competition history...</p>
+            </div>
+            <div class="view-more-container">
+                <a href="#full-history" class="view-more" id="show-competition-history">View All Competitions</a>
+            </div>
+        </section>
+
+        <!-- Full Leaderboard Section (Initially Hidden) -->
+        <section id="full-leaderboard" class="expanded-section hidden">
+            <div class="section-header">
+                <h2>Complete Leaderboard</h2>
+                <button class="close-button" aria-label="Close leaderboard">×</button>
+            </div>
+            <!-- Full leaderboard will be populated by JavaScript -->
+            <p>Loading full leaderboard data...</p>
+        </section>
+    </main>
+
+    <!-- Three.js Background Canvas Container -->
+    <div id="bg-canvas-container">
+        <!-- This div will contain the Three.js canvas for background effects -->
+        <!-- It's positioned in the background using CSS -->
+    </div>
+
+    <!-- Next Competition Section (Will be populated by JavaScript) -->
+    <section id="next-competition-info" class="fade-in">
+        <div class="loading-indicator">Loading next competition information...</div>
+    </section>
+
+    <!-- Submission Form Modal -->
+    <div id="submission-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Submit Your GitHub Repository</h2>
+                <button class="close-modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="github-submission-form">
+                    <div class="form-group">
+                        <label for="github-username">GitHub Username:</label>
+                        <input type="text" id="github-username" required placeholder="Your GitHub username">
+                    </div>
+                    <div class="form-group">
+                        <label for="repository-url">Repository URL:</label>
+                        <input type="url" id="repository-url" required
+                            placeholder="https://github.com/username/repository">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-title">Project Title:</label>
+                        <input type="text" id="project-title" required
+                            placeholder="A descriptive title for your project">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Project Description:</label>
+                        <textarea id="project-description" rows="4"
+                            placeholder="Brief description of your project and approach"></textarea>
+                    </div>
+                    <input type="hidden" id="competition-id" value="">
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Submit Entry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- This section contains site info, links, and credits -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About CodeClash</h3>
+                <p>A biweekly programming competition platform for friends to showcase coding creativity and build
+                    community through challenges.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="history.html">Competition History</a></li>
+                    <li><a href="current.html">Current Challenge</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>GitHub Repository: <a href="https://github.com/codeclash/competition-site" target="_blank"
+                        rel="noopener noreferrer">CodeClash</a></p>
+                <p>Deployed with <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub
+                        Pages</a></p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 CodeClash. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Success Message Container -->
+    <div id="submission-success" class="success-message hidden">
+        <div class="success-content">
+            <h3>Submission Received!</h3>
+            <p>Thank you for submitting your project. Your entry has been recorded.</p>
+            <button class="close-success">Close</button>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top-btn hidden" aria-label="Scroll to top">&uarr;</button>
+
+    <!-- JavaScript Files -->
+    <!-- Main.js is loaded first to initialize core functionality -->
+    <script src="js/main.js"></script>
+    <!-- Component scripts initialize themselves via DOM ready events -->
+    <script src="js/timer.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/three-background.js"></script>
+</body>
+
+</html>

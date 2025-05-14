@@ -1,0 +1,329 @@
+{
+    "competitions": [
+        {
+            "id": "competition-2025-05-01",
+            "title": "Data Visualization Challenge",
+            "theme": "Create an interactive data visualization using any dataset",
+            "startDate": "2025-05-01T00:00:00Z",
+            "endDate": "2025-05-14T20:30:00Z",
+            "participants": [
+                {
+                    "username": "dev1",
+                    "repositoryUrl": "https://github.com/dev1/data-viz-project",
+                    "projectTitle": "Global Climate Trends Explorer"
+                },
+                {
+                    "username": "dev2",
+                    "repositoryUrl": "https://github.com/dev2/data-viz-project",
+                    "projectTitle": "Stock Market Analysis Tool"
+                },
+                {
+                    "username": "dev3",
+                    "repositoryUrl": "https://github.com/dev3/data-viz-project",
+                    "projectTitle": "Music Listening Habits Visualization"
+                },
+                {
+                    "username": "dev6",
+                    "repositoryUrl": "https://github.com/dev6/data-viz-project",
+                    "projectTitle": "Sports Analytics Dashboard"
+                }
+            ],
+            "winner": {
+                "username": "dev1",
+                "repositoryUrl": "https://github.com/dev1/data-viz-project"
+            },
+            "runnerUps": [
+                {
+                    "username": "dev3",
+                    "repositoryUrl": "https://github.com/dev3/data-viz-project"
+                },
+                {
+                    "username": "dev2",
+                    "repositoryUrl": "https://github.com/dev2/data-viz-project"
+                }
+            ],
+            "resources": [
+                {
+                    "title": "D3.js Documentation",
+                    "url": "https://d3js.org/",
+                    "type": "documentation"
+                },
+                {
+                    "title": "Public APIs for Data",
+                    "url": "https://github.com/public-apis/public-apis",
+                    "type": "resource"
+                },
+                {
+                    "title": "Data Visualization Best Practices",
+                    "url": "https://www.tableau.com/learn/articles/data-visualization-tips",
+                    "type": "article"
+                }
+            ],
+            "notes": "This competition focused on creating accessible visualizations. The winner impressed judges with interactive climate data exploration tools and accessible design."
+        },
+        {
+            "id": "competition-2025-04-15",
+            "title": "CLI Tool Challenge",
+            "theme": "Build a useful command-line interface tool",
+            "startDate": "2025-04-15T00:00:00Z",
+            "endDate": "2025-04-30T20:30:00Z",
+            "participants": [
+                {
+                    "username": "dev1",
+                    "repositoryUrl": "https://github.com/dev1/cli-tool",
+                    "projectTitle": "File System Analyzer"
+                },
+                {
+                    "username": "dev3",
+                    "repositoryUrl": "https://github.com/dev3/cli-tool",
+                    "projectTitle": "Interactive Git Helper"
+                },
+                {
+                    "username": "dev4",
+                    "repositoryUrl": "https://github.com/dev4/cli-tool",
+                    "projectTitle": "Task Management CLI"
+                },
+                {
+                    "username": "dev7",
+                    "repositoryUrl": "https://github.com/dev7/cli-tool",
+                    "projectTitle": "Server Monitoring Tool"
+                }
+            ],
+            "winner": {
+                "username": "dev3",
+                "repositoryUrl": "https://github.com/dev3/cli-tool"
+            },
+            "runnerUps": [
+                {
+                    "username": "dev7",
+                    "repositoryUrl": "https://github.com/dev7/cli-tool"
+                },
+                {
+                    "username": "dev1",
+                    "repositoryUrl": "https://github.com/dev1/cli-tool"
+                }
+            ],
+            "resources": [
+                {
+                    "title": "Commander.js",
+                    "url": "https://github.com/tj/commander.js",
+                    "type": "library"
+                },
+                {
+                    "title": "Building CLI Applications with Node.js",
+                    "url": "https://blog.logrocket.com/building-typescript-cli-node-js/",
+                    "type": "tutorial"
+                }
+            ],
+            "notes": "Participants were encouraged to solve real-world problems with their tools. The winner's Interactive Git Helper provided intuitive workflows for complex git operations."
+        },
+        {
+            "id": "competition-2025-04-01",
+            "title": "API Integration Challenge",
+            "theme": "Build an application that integrates with at least two public APIs",
+            "startDate": "2025-04-01T00:00:00Z",
+            "endDate": "2025-04-14T20:30:00Z",
+            "participants": [
+                {
+                    "username": "dev2",
+                    "repositoryUrl": "https://github.com/dev2/api-integration",
+                    "projectTitle": "Weather-Based Travel Planner"
+                },
+                {
+                    "username": "dev5",
+                    "repositoryUrl": "https://github.com/dev5/api-integration",
+                    "projectTitle": "Movie Recommendation Engine"
+                },
+                {
+                    "username": "dev6",
+                    "repositoryUrl": "https://github.com/dev6/api-integration",
+                    "projectTitle": "Social Media Content Scheduler"
+                },
+                {
+                    "username": "dev8",
+                    "repositoryUrl": "https://github.com/dev8/api-integration",
+                    "projectTitle": "News Aggregator with Translation"
+                }
+            ],
+            "winner": {
+                "username": "dev2",
+                "repositoryUrl": "https://github.com/dev2/api-integration"
+            },
+            "runnerUps": [
+                {
+                    "username": "dev8",
+                    "repositoryUrl": "https://github.com/dev8/api-integration"
+                },
+                {
+                    "username": "dev6",
+                    "repositoryUrl": "https://github.com/dev6/api-integration"
+                }
+            ],
+            "resources": [
+                {
+                    "title": "Public APIs",
+                    "url": "https://github.com/public-apis/public-apis",
+                    "type": "resource"
+                },
+                {
+                    "title": "The Axios Documentation",
+                    "url": "https://axios-http.com/docs/intro",
+                    "type": "documentation"
+                },
+                {
+                    "title": "API Integration Best Practices",
+                    "url": "https://nordicapis.com/api-integration-best-practices/",
+                    "type": "article"
+                }
+            ],
+            "notes": "This challenge tested participants' ability to seamlessly integrate multiple APIs. The winning project combined weather forecasts with travel recommendations for optimal trip planning."
+        },
+        {
+            "id": "competition-2025-03-15",
+            "title": "Real-time Dashboard Challenge",
+            "theme": "Create a real-time dashboard for monitoring data streams",
+            "startDate": "2025-03-15T00:00:00Z",
+            "endDate": "2025-03-31T20:30:00Z",
+            "participants": [
+                {
+                    "username": "dev1",
+                    "repositoryUrl": "https://github.com/dev1/realtime-dashboard",
+                    "projectTitle": "IoT Home Monitoring System"
+                },
+                {
+                    "username": "dev4",
+                    "repositoryUrl": "https://github.com/dev4/realtime-dashboard",
+                    "projectTitle": "Server Performance Monitor"
+                },
+                {
+                    "username": "dev7",
+                    "repositoryUrl": "https://github.com/dev7/realtime-dashboard",
+                    "projectTitle": "Stock Trading Dashboard"
+                },
+                {
+                    "username": "dev8",
+                    "repositoryUrl": "https://github.com/dev8/realtime-dashboard",
+                    "projectTitle": "Social Media Analytics Panel"
+                }
+            ],
+            "winner": {
+                "username": "dev7",
+                "repositoryUrl": "https://github.com/dev7/realtime-dashboard"
+            },
+            "runnerUps": [
+                {
+                    "username": "dev1",
+                    "repositoryUrl": "https://github.com/dev1/realtime-dashboard"
+                },
+                {
+                    "username": "dev4",
+                    "repositoryUrl": "https://github.com/dev4/realtime-dashboard"
+                }
+            ],
+            "resources": [
+                {
+                    "title": "Socket.IO Documentation",
+                    "url": "https://socket.io/docs/v4/",
+                    "type": "documentation"
+                },
+                {
+                    "title": "D3.js for Real-time Visualization",
+                    "url": "https://d3js.org/",
+                    "type": "library"
+                },
+                {
+                    "title": "Real-time Dashboard Design Principles",
+                    "url": "https://www.datapine.com/blog/data-dashboard-design-principles-and-best-practices/",
+                    "type": "article"
+                }
+            ],
+            "notes": "The challenge emphasized low-latency updates and effective information presentation. The winning entry provided impressive real-time stock market data visualization with algorithmic trading indicators."
+        },
+        {
+            "id": "competition-2025-03-01",
+            "title": "Accessibility Focus Challenge",
+            "theme": "Create a web application with exceptional accessibility features",
+            "startDate": "2025-03-01T00:00:00Z",
+            "endDate": "2025-03-14T20:30:00Z",
+            "participants": [
+                {
+                    "username": "dev2",
+                    "repositoryUrl": "https://github.com/dev2/a11y-project",
+                    "projectTitle": "Screen Reader Optimized Recipe Site"
+                },
+                {
+                    "username": "dev3",
+                    "repositoryUrl": "https://github.com/dev3/a11y-project",
+                    "projectTitle": "Accessible Calendar Application"
+                },
+                {
+                    "username": "dev6",
+                    "repositoryUrl": "https://github.com/dev6/a11y-project",
+                    "projectTitle": "Online Learning Platform with a11y Features"
+                }
+            ],
+            "winner": {
+                "username": "dev3",
+                "repositoryUrl": "https://github.com/dev3/a11y-project"
+            },
+            "runnerUps": [
+                {
+                    "username": "dev6",
+                    "repositoryUrl": "https://github.com/dev6/a11y-project"
+                },
+                {
+                    "username": "dev2",
+                    "repositoryUrl": "https://github.com/dev2/a11y-project"
+                }
+            ],
+            "resources": [
+                {
+                    "title": "Web Content Accessibility Guidelines (WCAG)",
+                    "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+                    "type": "documentation"
+                },
+                {
+                    "title": "The A11y Project",
+                    "url": "https://www.a11yproject.com/",
+                    "type": "resource"
+                },
+                {
+                    "title": "Accessibility Testing Tools",
+                    "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/Tools",
+                    "type": "article"
+                }
+            ],
+            "notes": "This competition raised awareness about digital accessibility. The winning calendar application demonstrated exceptional keyboard navigation, screen reader support, and multiple visibility modes."
+        }
+    ],
+    "nextCompetition": {
+        "id": "competition-2025-05-15",
+        "title": "Game Development Challenge",
+        "theme": "Create a browser-based game using vanilla JavaScript",
+        "startDate": "2025-05-15T00:00:00Z",
+        "endDate": "2025-05-31T20:30:00Z",
+        "resources": [
+            {
+                "title": "MDN Game Development Center",
+                "url": "https://developer.mozilla.org/en-US/docs/Games",
+                "type": "documentation"
+            },
+            {
+                "title": "Game Programming Patterns",
+                "url": "http://gameprogrammingpatterns.com/",
+                "type": "book"
+            },
+            {
+                "title": "HTML5 Canvas Tutorial",
+                "url": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial",
+                "type": "tutorial"
+            },
+            {
+                "title": "Intro to Game Development with JavaScript",
+                "url": "https://developer.mozilla.org/en-US/docs/Games/Introduction",
+                "type": "tutorial"
+            }
+        ],
+        "notes": "Focus on creating engaging gameplay rather than complex graphics. Entries will be judged on originality, game mechanics, and player engagement."
+    }
+}
