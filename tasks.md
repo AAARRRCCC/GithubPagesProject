@@ -270,6 +270,7 @@ This file serves as a comprehensive checklist for the CodeClash GitHub Pages pro
 - [x] Create documentation for data management (medium) (completed on 5/14/2025)
 - [x] Add contribution guidelines (easy) (completed on 5/14/2025)
 - [x] Launch the platform for first competition (medium) (completed on 5/14/2025)
+- [x] Create NEXT_STEPS.md roadmap document (medium) (completed on 5/14/2025)
 
 ## Future Enhancements (Planning)
 
