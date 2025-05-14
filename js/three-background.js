@@ -1,13 +1,13 @@
 /**
  * CodeClash: Programming Competition Leaderboard
  * Three.js Background Module
- * 
+ *
  * This file handles the Three.js background effects that provide ambient, interactive
  * visual elements to enhance the user experience.
  */
 
-// Ensure Three.js is loaded before executing this code
-document.addEventListener('DOMContentLoaded', () => {
+// Export the initialization function to be called from main.js
+export function initializeThreeBackground() {
     // Check if the background canvas container exists
     const bgCanvasContainer = document.getElementById('bg-canvas-container');
 
@@ -20,17 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             initThreeBackground(bgCanvasContainer);
+            // Dispatch event to notify main.js that the background is loaded
+            document.dispatchEvent(new CustomEvent('threeBackground:loaded'));
         } catch (error) {
             console.error('Error initializing Three.js background:', error);
+            // Dispatch event to notify main.js that the background failed to load
+            document.dispatchEvent(new CustomEvent('threeBackground:error'));
             // Allow the site to function without the background
         }
     }
-});
+}
 
 /**
  * Initialize the Three.js background
  * @param {HTMLElement} container - The container element for the Three.js canvas
  */
+// Private function to initialize the Three.js background
 function initThreeBackground(container) {
     console.log('Initializing Three.js background');
 

@@ -6,6 +6,21 @@
  * It coordinates the various components and ensures they work together seamlessly.
  */
 
+// Import modules
+import { initializeThreeBackground } from './three-background.js';
+import { initializeCountdownTimer } from './timer.js';
+import { initializeLeaderboard } from './leaderboard.js';
+import { loadCompetitionData, loadTopParticipants } from './data.js';
+import {
+    setupTheme,
+    setupResponsiveNavigation,
+    highlightCurrentPageInNav,
+    setupScrollEffects,
+    setupGitHubSubmissionForm,
+    showGitHubSubmissionForm,
+    handleUrlHash
+} from './ui.js';
+
 // Global state to track initialization status
 const appState = {
     componentsLoaded: {
@@ -37,8 +52,12 @@ function initializeApp() {
     setupScrollEffects();
 
     // Next, initialize components that may take time to load
-    initializeThreeJsBackground();
+    initializeThreeBackground();
     registerComponentCallbacks();
+
+    // Initialize other components
+    initializeCountdownTimer();
+    initializeLeaderboard();
 
     // Load page-specific data
     loadPageData();
@@ -101,214 +120,6 @@ function checkAllComponentsLoaded() {
     }
 }
 
-/**
- * Initialize Three.js background with error handling
- */
-function initializeThreeJsBackground() {
-    try {
-        // The three-background.js file initializes itself via DOMContentLoaded
-        // Here we just add error handling and cross-component coordination
-        console.log('Three.js background initialization requested');
-
-        // Create a timeout to detect if Three.js fails to initialize
-        setTimeout(() => {
-            const bgCanvasContainer = document.getElementById('bg-canvas-container');
-            if (bgCanvasContainer && bgCanvasContainer.children.length === 0) {
-                console.warn('Three.js background failed to initialize within timeout period');
-                // Dispatch event so other components know Three.js failed
-                document.dispatchEvent(new CustomEvent('threeBackground:error'));
-
-                // Fallback to static background
-                document.body.classList.add('static-background');
-            }
-        }, 2000);
-
-    } catch (error) {
-        console.error('Error in Three.js background initialization:', error);
-        // Fallback to ensure site usability if Three.js fails
-        document.body.classList.add('static-background');
-    }
-}
-
-/**
- * Highlight the current page in the navigation menu
- */
-function highlightCurrentPageInNav() {
-    // Get the current page path
-    const currentPath = window.location.pathname;
-
-    // Find all navigation links
-    const navLinks = document.querySelectorAll('nav a');
-
-    // Loop through links and highlight the current one
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath.substring(currentPath.lastIndexOf('/') + 1)) {
-            link.classList.add('active');
-        }
-    });
-}
-
-/**
- * Setup responsive navigation menu for mobile devices
- */
-function setupResponsiveNavigation() {
-    // Create mobile menu toggle button if it doesn't exist
-    if (!document.querySelector('.mobile-menu-toggle')) {
-        const header = document.querySelector('header');
-
-        if (header) {
-            const menuToggle = document.createElement('button');
-            menuToggle.className = 'mobile-menu-toggle';
-            menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
-            menuToggle.innerHTML = '<span></span><span></span><span></span>';
-
-            header.appendChild(menuToggle);
-
-            // Add event listener to toggle menu
-            menuToggle.addEventListener('click', toggleMobileMenu);
-        }
-    } else {
-        // Just add event listener if button already exists
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
-    }
-
-    // Handle window resize to reset menu state on desktop
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && appState.mobileMenuOpen) {
-            document.querySelector('nav').classList.remove('mobile-open');
-            appState.mobileMenuOpen = false;
-        }
-    });
-}
-
-/**
- * Toggle mobile navigation menu
- */
-function toggleMobileMenu() {
-    const nav = document.querySelector('nav');
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-
-    appState.mobileMenuOpen = !appState.mobileMenuOpen;
-
-    if (appState.mobileMenuOpen) {
-        nav.classList.add('mobile-open');
-        menuToggle.classList.add('active');
-        document.body.classList.add('menu-open');
-    } else {
-        nav.classList.remove('mobile-open');
-        menuToggle.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    }
-}
-
-/**
- * Setup dark/light theme toggle and apply saved preference
- */
-function setupTheme() {
-    // Create theme toggle button if it doesn't exist
-    if (!document.getElementById('theme-toggle')) {
-        const header = document.querySelector('header');
-
-        if (header) {
-            const themeToggle = document.createElement('button');
-            themeToggle.id = 'theme-toggle';
-            themeToggle.className = 'theme-toggle';
-            themeToggle.setAttribute('aria-label', 'Toggle dark/light theme');
-            themeToggle.innerHTML = '<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1zm0 15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zM5 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1zm12 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1zm-7.071 3.536a1 1 0 0 1 0 1.414l-.707.707a1 1 0 1 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 0zm8.485-8.486a1 1 0 0 1 0 1.414l-.707.707a1 1 0 1 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 0zm-9.9.707a1 1 0 1 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707zm8.486 8.486a1 1 0 1 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414l-.707.707z"/></svg><svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.57 3.38a8 8 0 0 0 10.4 10.4 8 8 0 1 1-10.4-10.4zm1.02-2.83a10 10 0 1 0 11.6 11.6 10 10 0 1 1-11.6-11.6z"/></svg>';
-
-            header.appendChild(themeToggle);
-
-            // Add event listener for theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
-        }
-    } else {
-        // Just add event listener if button already exists
-        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-    }
-
-    // Apply saved theme
-    if (appState.darkMode) {
-        document.documentElement.classList.add('dark-theme');
-        document.getElementById('theme-toggle')?.classList.add('dark');
-    }
-}
-
-/**
- * Toggle between dark and light theme
- */
-function toggleTheme() {
-    appState.darkMode = !appState.darkMode;
-
-    if (appState.darkMode) {
-        document.documentElement.classList.add('dark-theme');
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        document.documentElement.classList.remove('dark-theme');
-        localStorage.setItem('darkMode', 'disabled');
-    }
-
-    // Update button state
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        themeToggle.classList.toggle('dark', appState.darkMode);
-    }
-
-    // Notify Three.js background to update colors if needed
-    document.dispatchEvent(new CustomEvent('theme:changed', {
-        detail: { darkMode: appState.darkMode }
-    }));
-}
-
-/**
- * Setup scroll-based effects and animations
- */
-function setupScrollEffects() {
-    // Add intersection observer for fade-in elements
-    const fadeElements = document.querySelectorAll('.fade-in');
-
-    if (fadeElements.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-    }
-
-    // Add scroll-to-top button if not already present
-    if (!document.getElementById('scroll-to-top')) {
-        const scrollBtn = document.createElement('button');
-        scrollBtn.id = 'scroll-to-top';
-        scrollBtn.className = 'scroll-to-top-btn hidden';
-        scrollBtn.setAttribute('aria-label', 'Scroll to top');
-        scrollBtn.innerHTML = '&uarr;';
-
-        document.body.appendChild(scrollBtn);
-
-        // Show/hide button based on scroll position
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                scrollBtn.classList.remove('hidden');
-            } else {
-                scrollBtn.classList.add('hidden');
-            }
-        });
-
-        // Add click handler
-        scrollBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-}
 
 /**
  * Load data needed for the current page
@@ -319,8 +130,7 @@ function loadPageData() {
 
     // Home page
     if (path.endsWith('index.html') || path.endsWith('/') || document.querySelector('.leaderboard-preview')) {
-        // The leaderboard.js and timer.js modules initialize themselves
-        // But we can add additional page-specific data loading here
+        // Load next competition info
         loadNextCompetitionInfo();
     }
     // Leaderboard page (if separate from homepage)
@@ -344,13 +154,7 @@ function loadPageData() {
  * Load information about the next competition
  */
 function loadNextCompetitionInfo() {
-    fetch('data/competitions.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to load competition data');
-            }
-            return response.json();
-        })
+    loadCompetitionData()
         .then(data => {
             if (data.nextCompetition) {
                 displayNextCompetition(data.nextCompetition);
@@ -569,240 +373,5 @@ function setupLeaderboardToggle() {
 
             document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
         });
-    }
-}
-
-/**
- * Set up GitHub repository submission form
- */
-function setupGitHubSubmissionForm() {
-    // Create modal container if it doesn't exist
-    if (!document.getElementById('submission-modal')) {
-        const modal = document.createElement('div');
-        modal.id = 'submission-modal';
-        modal.className = 'modal hidden';
-
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Submit Your GitHub Repository</h2>
-                    <button class="close-modal" aria-label="Close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="github-submission-form">
-                        <div class="form-group">
-                            <label for="github-username">GitHub Username:</label>
-                            <input type="text" id="github-username" required
-                                placeholder="Your GitHub username">
-                        </div>
-                        <div class="form-group">
-                            <label for="repository-url">Repository URL:</label>
-                            <input type="url" id="repository-url" required
-                                placeholder="https://github.com/username/repository">
-                        </div>
-                        <div class="form-group">
-                            <label for="project-title">Project Title:</label>
-                            <input type="text" id="project-title" required
-                                placeholder="A descriptive title for your project">
-                        </div>
-                        <div class="form-group">
-                            <label for="project-description">Project Description:</label>
-                            <textarea id="project-description" rows="4"
-                                placeholder="Brief description of your project and approach"></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="submit-btn">Submit Entry</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        // Add event listeners for the modal
-        const closeBtn = modal.querySelector('.close-modal');
-        closeBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            document.body.classList.remove('modal-open');
-        });
-
-        // Close modal when clicking outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                document.body.classList.remove('modal-open');
-            }
-        });
-
-        // Handle form submission
-        const form = document.getElementById('github-submission-form');
-        form.addEventListener('submit', handleSubmissionFormSubmit);
-    }
-}
-
-/**
- * Show the GitHub submission form modal
- * @param {string} competitionId - ID of the competition to submit to
- */
-function showGitHubSubmissionForm(competitionId) {
-    const modal = document.getElementById('submission-modal');
-    if (!modal) return;
-
-    // Add competition ID to form as hidden field if it doesn't exist
-    let competitionField = document.getElementById('competition-id');
-    if (!competitionField) {
-        competitionField = document.createElement('input');
-        competitionField.type = 'hidden';
-        competitionField.id = 'competition-id';
-        document.getElementById('github-submission-form').appendChild(competitionField);
-    }
-
-    // Set competition ID
-    competitionField.value = competitionId;
-
-    // Show modal
-    modal.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-}
-
-/**
- * Handle GitHub submission form submissions
- * @param {Event} event - The form submission event
- */
-function handleSubmissionFormSubmit(event) {
-    event.preventDefault();
-
-    // Get form data
-    const username = document.getElementById('github-username').value.trim();
-    const repositoryUrl = document.getElementById('repository-url').value.trim();
-    const projectTitle = document.getElementById('project-title').value.trim();
-    const projectDescription = document.getElementById('project-description').value.trim();
-    const competitionId = document.getElementById('competition-id').value;
-
-    // Validate GitHub repository URL format
-    if (!validateGitHubUrl(repositoryUrl)) {
-        showFormError('Please enter a valid GitHub repository URL');
-        return;
-    }
-
-    // In a real application, this would send data to a server
-    // For now, we'll just log it and show a success message
-    console.log('Submission received:', {
-        username,
-        repositoryUrl,
-        projectTitle,
-        projectDescription,
-        competitionId
-    });
-
-    // Show success message
-    showSubmissionSuccessMessage();
-}
-
-/**
- * Validate GitHub repository URL format
- * @param {string} url - URL to validate
- * @return {boolean} Whether the URL is valid
- */
-function validateGitHubUrl(url) {
-    // Basic validation for GitHub repository URL format
-    return /^https:\/\/github\.com\/[\w-]+\/[\w-]+\/?$/.test(url);
-}
-
-/**
- * Show error message for the submission form
- * @param {string} message - Error message to display
- */
-function showFormError(message) {
-    // Look for existing error message
-    let errorElement = document.querySelector('.form-error');
-
-    // Create if it doesn't exist
-    if (!errorElement) {
-        errorElement = document.createElement('div');
-        errorElement.className = 'form-error';
-        const form = document.getElementById('github-submission-form');
-        form.insertBefore(errorElement, form.firstChild);
-    }
-
-    // Set message and show
-    errorElement.textContent = message;
-    errorElement.classList.add('visible');
-
-    // Hide after a delay
-    setTimeout(() => {
-        errorElement.classList.remove('visible');
-    }, 5000);
-}
-
-/**
- * Show success message after form submission
- */
-function showSubmissionSuccessMessage() {
-    // Hide modal
-    const modal = document.getElementById('submission-modal');
-    modal.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-
-    // Create success message if it doesn't exist
-    let successMessage = document.getElementById('submission-success');
-    if (!successMessage) {
-        successMessage = document.createElement('div');
-        successMessage.id = 'submission-success';
-        successMessage.className = 'success-message hidden';
-
-        successMessage.innerHTML = `
-            <div class="success-content">
-                <h3>Submission Received!</h3>
-                <p>Thank you for submitting your project. Your entry has been recorded.</p>
-                <button class="close-success">Close</button>
-            </div>
-        `;
-
-        document.body.appendChild(successMessage);
-
-        // Add close button event listener
-        successMessage.querySelector('.close-success').addEventListener('click', () => {
-            successMessage.classList.add('hidden');
-        });
-    }
-
-    // Show success message
-    successMessage.classList.remove('hidden');
-
-    // Reset form
-    document.getElementById('github-submission-form').reset();
-
-    // Hide message after delay
-    setTimeout(() => {
-        successMessage.classList.add('hidden');
-    }, 5000);
-}
-
-/**
- * Handle URL hash for direct linking to sections
- */
-function handleUrlHash() {
-    const hash = window.location.hash;
-
-    if (hash) {
-        // Remove the # character
-        const targetId = hash.substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
-            // If it's a hidden element that should be shown
-            if (targetElement.classList.contains('expanded-section') &&
-                targetElement.classList.contains('hidden')) {
-                targetElement.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
-            }
-
-            // Scroll to the element
-            setTimeout(() => {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
     }
 }

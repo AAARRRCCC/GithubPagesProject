@@ -1,23 +1,26 @@
 /**
  * CodeClash: Programming Competition Leaderboard
  * Countdown Timer Module
- * 
+ *
  * This file manages the countdown timer functionality, displaying the time remaining
  * until the next competition deadline (8:30pm on 5/14).
  */
 
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Export the initialization function to be called from main.js
+export function initializeCountdownTimer() {
     // Initialize the countdown timer if it exists on the page
     const countdownElement = document.getElementById('countdown-timer');
     if (countdownElement) {
         initializeCountdown();
+        // Dispatch event to notify main.js that the timer is loaded
+        document.dispatchEvent(new CustomEvent('timer:loaded'));
     }
-});
+}
 
 /**
  * Initialize the countdown timer functionality
  */
+// Private function to initialize the countdown
 function initializeCountdown() {
     console.log('Countdown timer initialized');
 

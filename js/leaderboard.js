@@ -1,13 +1,13 @@
 /**
  * CodeClash: Programming Competition Leaderboard
  * Leaderboard Module
- * 
+ *
  * This file handles the leaderboard functionality, displaying competition winners
  * and rankings based on the data stored in the data directory.
  */
 
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Export the initialization functions to be called from main.js
+export function initializeLeaderboard() {
     // Check if we're on a page that has a leaderboard element
     const leaderboardElement = document.querySelector('.leaderboard-preview');
     const fullLeaderboardElement = document.getElementById('full-leaderboard');
@@ -20,11 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // We're on the dedicated leaderboard page
         initializeFullLeaderboard();
     }
-});
+
+    // Dispatch event to notify main.js that the leaderboard is loaded
+    document.dispatchEvent(new CustomEvent('leaderboard:loaded'));
+}
 
 /**
  * Initialize the leaderboard preview on the homepage
  */
+// Private function to initialize the leaderboard preview
 function initializeLeaderboardPreview() {
     console.log('Leaderboard preview initialized');
 
@@ -42,6 +46,7 @@ function initializeLeaderboardPreview() {
 /**
  * Initialize the full leaderboard on the leaderboard page
  */
+// Private function to initialize the full leaderboard
 function initializeFullLeaderboard() {
     console.log('Full leaderboard initialized');
 
@@ -61,6 +66,7 @@ function initializeFullLeaderboard() {
  * @param {number} limit - Number of participants to return
  * @return {Promise} Promise resolving to participants data
  */
+// Data loading functions
 function loadTopParticipants(limit = 3) {
     return fetch('data/participants.json')
         .then(response => {
