@@ -3,7 +3,7 @@
  * Three.js Background Module
  *
  * This file handles the Three.js background effects that provide ambient, interactive
- * visual elements to enhance the user experience.
+ * visual elements to enhance the user experience with a cyber theme.
  */
 
 // Export the initialization function to be called from main.js
@@ -149,7 +149,7 @@ function addBackgroundElements(scene) {
  */
 function addCodeParticles(scene) {
     // Create a particle system for code snippets
-    const particleCount = 80;
+    const particleCount = 200; // Increased particle count for a denser effect
     const particles = new THREE.BufferGeometry();
 
     // Create arrays for particle positions, sizes and colors
@@ -157,15 +157,14 @@ function addCodeParticles(scene) {
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
 
-    // Define code colors - blues and greens for a programming feel
+    // Define cyber colors - blues, greens, and purples
     const colorPalette = [
-        new THREE.Color(0x61dafb), // React blue
-        new THREE.Color(0x3178c6), // TypeScript blue
-        new THREE.Color(0x41b883), // Vue green
-        new THREE.Color(0x3eaf7c), // Vue docs green
-        new THREE.Color(0x00d8ff), // Light blue
-        new THREE.Color(0x4584b6), // Python blue
-        new THREE.Color(0x3572A5)  // Another Python shade
+        new THREE.Color(0x00ffff), // Cyan
+        new THREE.Color(0x00ff00), // Green
+        new THREE.Color(0x9933ff), // Purple
+        new THREE.Color(0x33ccff), // Light blue
+        new THREE.Color(0xcc00ff), // Magenta
+        new THREE.Color(0x00cc99)  // Teal
     ];
 
     // Create particles with random positions, sizes and colors
@@ -184,7 +183,7 @@ function addCodeParticles(scene) {
         colors[i3 + 2] = color.b;
 
         // Random sizes for variety
-        sizes[i] = 0.5 + Math.random() * 1.5;
+        sizes[i] = 0.2 + Math.random() * 0.8; // Smaller sizes
     }
 
     // Add attributes to particles geometry
@@ -194,9 +193,9 @@ function addCodeParticles(scene) {
 
     // Create shader material for particles
     const particleMaterial = new THREE.PointsMaterial({
-        size: 0.8,
+        size: 0.5, // Adjusted size
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.8, // Slightly more opaque
         vertexColors: true,
         sizeAttenuation: true,
         blending: THREE.AdditiveBlending
@@ -244,18 +243,20 @@ function addGeometricElements(scene) {
         new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16)
     ];
 
-    // Colors associated with programming languages and tools
+    // Cyber-themed colors for geometric elements
     const colors = [
-        0x4584b6,  // Python blue
-        0xf7df1e,  // JavaScript yellow
-        0xff6c37,  // Rust/Swift orange
-        0x41b883,  // Vue green
-        0x61dafb,  // React blue
-        0xdd0031,  // Angular red
+        0x00ffff,  // Cyan
+        0x00ff00,  // Green
+        0x9933ff,  // Purple
+        0x33ccff,  // Light blue
+        0xcc00ff,  // Magenta
+        0x00cc99,  // Teal
+        0x6600cc,  // Darker purple
+        0x0099cc   // Medium blue
     ];
 
     // Create 15-20 objects for a dense but not overwhelming scene
-    const objectCount = 18;
+    const objectCount = 25; // Increased object count
     for (let i = 0; i < objectCount; i++) {
         // Random geometry
         const geometry = geometries[Math.floor(Math.random() * geometries.length)];
@@ -267,31 +268,22 @@ function addGeometricElements(scene) {
         let material;
         const materialType = Math.random();
 
-        if (materialType < 0.4) {
+        if (materialType < 0.5) { // Increased chance of wireframe
             // Wireframe look for code/algorithm representation
             material = new THREE.MeshBasicMaterial({
                 color: color,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.7
+                opacity: 0.6 // Slightly less opaque
             });
-        } else if (materialType < 0.7) {
-            // Shiny look for modern programming concepts
-            material = new THREE.MeshPhongMaterial({
-                color: color,
-                transparent: true,
-                opacity: 0.8,
-                shininess: 100,
-                specular: 0xffffff
-            });
-        } else {
-            // Standard look with medium opacity
+        } else { // Simplified to one other material type
+            // Standard look with medium opacity and more metallic/roughness for cyber feel
             material = new THREE.MeshStandardMaterial({
                 color: color,
                 transparent: true,
-                opacity: 0.85,
-                roughness: 0.5,
-                metalness: 0.2
+                opacity: 0.7, // Slightly less opaque
+                roughness: 0.3, // More reflective
+                metalness: 0.7 // More metallic
             });
         }
 
@@ -357,12 +349,12 @@ function addBinaryPlanes(scene) {
         canvas.height = size;
 
         const context = canvas.getContext('2d');
-        context.fillStyle = 'rgba(10, 30, 50, 0.2)';
+        context.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Darker background for cyber feel
         context.fillRect(0, 0, size, size);
-        context.font = '12px Courier New';
+        context.font = '14px Courier New'; // Slightly larger font
 
-        // Randomly choose color based on programming themes
-        const colors = ['rgba(95, 215, 255, 0.7)', 'rgba(100, 220, 200, 0.7)', 'rgba(65, 184, 131, 0.7)'];
+        // Randomly choose color based on cyber themes
+        const colors = ['rgba(0, 255, 255, 0.6)', 'rgba(0, 255, 0, 0.6)', 'rgba(153, 51, 255, 0.6)', 'rgba(51, 204, 255, 0.6)']; // Cyber colors with slightly lower opacity
         context.fillStyle = colors[Math.floor(Math.random() * colors.length)];
 
         // Fill with random binary (0s and 1s) and code symbols
@@ -396,8 +388,9 @@ function addBinaryPlanes(scene) {
         const planeMaterial = new THREE.MeshBasicMaterial({
             map: texture,
             transparent: true,
-            opacity: 0.5,
-            side: THREE.DoubleSide
+            opacity: 0.4, // Slightly lower opacity for subtlety
+            side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending // Additive blending for a glowing effect
         });
 
         const plane = new THREE.Mesh(planeGeometry, planeMaterial);
