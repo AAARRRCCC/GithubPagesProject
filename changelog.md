@@ -205,13 +205,13 @@
 ### Challenges and Solutions
 - **Challenge**: Three.js performance issues on lower-end devices
   **Solution**: Implemented level-of-detail adjustments based on device capability and added performance mode toggle
-  
+
 - **Challenge**: Responsive design for complex leaderboard tables
   **Solution**: Created alternative card-based layouts for mobile with horizontal scrolling for essential data
-  
+
 - **Challenge**: Cross-component communication between Three.js background and UI elements
   **Solution**: Implemented event-based communication system with centralized event management
-  
+
 - **Challenge**: Maintaining consistent theme across light/dark mode transitions
   **Solution**: Created comprehensive CSS variable system for theming and smooth transition animations
 
@@ -219,7 +219,7 @@
 - Two tasks remain incomplete in the JavaScript Core Structure section:
   - Setting up a module loading system
   - Adding internationalization support (marked as optional)
-  
+
 - Future enhancements could include:
   - Implementation of profile pages for participants (planned but not implemented)
   - Development of achievement system to increase engagement
@@ -300,14 +300,10 @@ This comprehensive implementation provides a solid foundation for the CodeClash 
 - Updated index.html to include a section for the current challenge with the prompt "Vibe Coding".
 
 ### Updated
-- Remade the Three.js background animation in `js/three-background.js` with a refined 'cyber' theme:
-  - Updated particle colors to cyber-themed blues, greens, and purples.
-  - Increased the number of particles for a denser effect.
-  - Adjusted particle sizes for variety.
-  - Modified particle material properties for better visual integration with the cyber theme.
-  - Changed geometric element colors to cyber-themed palette.
-  - Increased the count of geometric objects.
-  - Adjusted material properties of geometric elements (increased wireframe chance, more metallic/reflective standard material).
-  - Updated binary plane canvas background color to a darker shade.
-  - Increased the font size for binary symbols on the planes.
-  - Adjusted binary plane material opacity and added additive blending for a glowing effect.
+- Remade the Three.js background animation in `js/three-background.js` with a refined 'Abstract Data Flow' theme:
+  - Replaced cyber-themed particles, geometric shapes, and binary planes with abstract nodes and connecting lines.
+  - Implemented subtle glowing lines representing data paths.
+  - Added abstract nodes as points of data origin, processing, or destination.
+  - Used a minimalist color palette with blues and cyan for a professional look.
+  - Ensured smooth animations and transitions for all elements.
+  - Utilized Three.js's 3D capabilities to create depth and perspective.
